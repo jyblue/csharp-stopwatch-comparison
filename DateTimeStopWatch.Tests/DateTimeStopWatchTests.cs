@@ -117,5 +117,35 @@ namespace DateTimeStopWatch.Tests
             stopWatch.Start();
             Assert.That(() => stopWatch.ElapsedMilliseconds, Is.EqualTo(20000).Within(50).After(10).Seconds.PollEvery(10).MilliSeconds);
         }
+
+        [Test]
+        public void StopWatch_scenario_test()
+        {
+            StopWatch stopWatch = new StopWatch();
+            Assert.That(stopWatch.IsRunning, Is.False);
+
+            stopWatch.Start();
+            Assert.That(stopWatch.IsRunning, Is.True);
+            Assert.That(stopWatch.ElapsedMilliseconds, Is.GreaterThanOrEqualTo(0));
+            Assert.That(() => stopWatch.ElapsedMilliseconds, Is.EqualTo(1000).Within(50).After(1).Seconds.PollEvery(10).MilliSeconds);
+
+            stopWatch.Stop();
+            Assert.That(stopWatch.IsRunning, Is.False);
+            Assert.That(stopWatch.ElapsedMilliseconds, Is.EqualTo(1000).Within(50));
+            Assert.That(() => stopWatch.ElapsedMilliseconds, Is.EqualTo(1000).Within(50).After(1).Seconds.PollEvery(10).MilliSeconds);
+
+            stopWatch.Start();
+            Assert.That(stopWatch.IsRunning, Is.True);
+            Assert.That(() => stopWatch.ElapsedMilliseconds, Is.EqualTo(2000).Within(50).After(1).Seconds.PollEvery(10).MilliSeconds);
+
+            stopWatch.Stop();
+            Assert.That(stopWatch.IsRunning, Is.False);
+            Assert.That(stopWatch.ElapsedMilliseconds, Is.EqualTo(2000).Within(50));
+            Assert.That(() => stopWatch.ElapsedMilliseconds, Is.EqualTo(2000).Within(50).After(1).Seconds.PollEvery(10).MilliSeconds);
+
+            stopWatch.Restart();
+            Assert.That(stopWatch.IsRunning, Is.True);
+            Assert.That(() => stopWatch.ElapsedMilliseconds, Is.EqualTo(1000).Within(50).After(1).Seconds.PollEvery(10).MilliSeconds);
+        }
     }
 }
