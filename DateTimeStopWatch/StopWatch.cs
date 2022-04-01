@@ -38,7 +38,7 @@ namespace DateTimeStopWatch
 
         private void updateElapsedTime()
         {
-            DateTime now = DateTime.Now;
+            DateTime now = DateTime.UtcNow;
 
             double elapsed = now.Subtract(beginTime).TotalMilliseconds + residue;
             residue = elapsed - Math.Truncate(elapsed);
@@ -53,7 +53,7 @@ namespace DateTimeStopWatch
 
             lock (this)
             {
-                beginTime = DateTime.Now;
+                beginTime = DateTime.UtcNow;
                 isRunning = true;
             }
         }
@@ -62,7 +62,7 @@ namespace DateTimeStopWatch
         {
             lock (this)
             {
-                beginTime = DateTime.Now;
+                beginTime = DateTime.UtcNow;
                 elapsedMilliseconds = 0;
                 isRunning = true;
             }
