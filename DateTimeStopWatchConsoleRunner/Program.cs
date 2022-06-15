@@ -11,7 +11,6 @@ namespace DateTimeStopWatchConsoleRunner
         [DllImport("Kernel32.dll"), SuppressUnmanagedCodeSecurity]
         public static extern int GetCurrentProcessorNumber();
 
-
         static void Main(string[] args)
         {
             Console.WriteLine($"ThreadID={Thread.CurrentThread.ManagedThreadId}");
